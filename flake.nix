@@ -23,6 +23,11 @@
           done
         '';
       };
+
+      # GCC wrapper: suppresses -Werror=unused-result (GCC 15 compat)
+      hostcc = pkgs.writeShellScriptBin "gcc-wrap" ''
+        exec gcc -Wno-error=unused-result "$@"
+      '';
     in {
       devShells.default = pkgs.mkShell {
         name = "vayu-edk";
@@ -38,11 +43,13 @@
           bash
           dtc
           acpica-tools
+          hostcc
         ];
 
         CROSS_COMPILE = "aarch64-linux-gnu-";
 
         shellHook = ''
+          export HOSTCC="${hostcc}/bin/gcc-wrap"
           echo "vayu-edk dev shell"
           echo "  cross-compiler: aarch64-linux-gnu- (gcc $(aarch64-linux-gnu-gcc -dumpversion 2>/dev/null || echo unknown))"
           echo "  clang: $(clang --version | head -1)"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function _help(){
 	echo "Usage: build.sh --device DEV"
