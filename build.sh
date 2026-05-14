@@ -23,7 +23,7 @@ function _help(){
 	echo "	--installer-zip, -z:     generate flashable installer zip."
 	echo "	--help, -h:              show this help."
 	echo
-	echo "MainPage: https://github.com/edk2-porting/edk2-msm"
+	echo "MainPage: https://github.com/Lunitur/edk2-msm"
 	exit "${1}"
 }
 
